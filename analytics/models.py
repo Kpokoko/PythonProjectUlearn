@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Vacancy(models.Model):
     name = models.CharField(max_length=150)
     key_skills = models.TextField()
@@ -11,3 +12,13 @@ class Vacancy(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Currency(models.Model):
+    date = models.DateField()
+    currency_code = models.CharField(max_length=5)
+    currency = models.FloatField()
+
+    class Meta:
+        unique_together = ('date', 'currency_code')
+        db_table = 'currencies'
