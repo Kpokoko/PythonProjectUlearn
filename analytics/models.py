@@ -22,3 +22,19 @@ class Currency(models.Model):
     class Meta:
         unique_together = ('date', 'currency_code')
         db_table = 'currencies'
+
+
+
+class Salary_by_year(models.Model):
+    avg_salary = models.FloatField()
+    year = models.IntegerField()
+
+    class Meta:
+        db_table = 'salaries_by_year'
+
+class Vacancies_by_year(models.Model):
+    vacancy_count = models.IntegerField()
+    year = models.IntegerField()
+
+    class Meta:
+        db_table = 'vacancies_by_year'
