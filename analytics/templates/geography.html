@@ -24,45 +24,45 @@
             height: auto;
         }
     </style>
-    <h1>Востребованность</h1>
-    <h3>Динамика уровня зарплат по годам</h3>
+    <h1>География</h1>
+    <h3>Динамика уровня зарплат по городам</h3>
     <div class="table-container">
         <table>
             <thead>
                 <tr>
                     <th>Средняя зарплата</th>
-                    <th>Год</th>
+                    <th>Город</th>
                 </tr>
             </thead>
             <tbody>
-                {% for e in salaries_by_year %}
+                {% for e in salaries_by_city %}
                     <tr>
                         <td>{{ e.avg_salary }}</td>
-                        <td>{{ e.year }}</td>
+                        <td>{{ e.area_name }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <img src="{% static 'img/graphs/salary_by_year.png' %}" alt="Уровень зарплат по годам">
+        <img src="{% static 'img/graphs/salary_by_city.png' %}" alt="Уровень зарплат по годам">
     </div>
-    <h3>Количество вакансий по годам</h3>
+    <h3>Количество вакансий по городам</h3>
     <div class="table-container">
         <table>
             <thead>
                 <tr>
                     <th>Количество вакансий</th>
-                    <th>Год</th>
+                    <th>Город</th>
                 </tr>
             </thead>
             <tbody>
-                {% for e in vacancies_by_year %}
+                {% for e in vacancies_by_city %}
                     <tr>
                         <td>{{ e.vacancy_count }}</td>
-                        <td>{{ e.year }}</td>
+                        <td>{{ e.area_name }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <img src="{% static 'img/graphs/vacancies_by_year.png' %}" alt="Количество вакансий по годам">
+        <img src="{% static 'img/graphs/vacancies_by_city.png' %}" alt="Количество вакансий по годам">
     </div>
 {% endblock %}

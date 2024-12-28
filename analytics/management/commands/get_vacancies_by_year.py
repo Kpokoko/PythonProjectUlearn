@@ -6,6 +6,7 @@ from analytics.models import Vacancy, Vacancies_by_year
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
+        Vacancies_by_year.objects.all().delete()
         data = Vacancy.objects.filter(published_at__isnull=False)
 
         data = (data.annotate(year=Substr('published_at', 1, 4))  # Аннотируем данные, извлекая год из даты публикации

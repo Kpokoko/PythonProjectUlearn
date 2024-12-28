@@ -1,13 +1,13 @@
 from django.core.management.base import BaseCommand
-from django.db.models import F, Avg
-from django.db.models.functions import Substr, Round
-from analytics.models import Vacancy, Currency, Salary_by_year
+from django.db.models import F, Avg, Count
+from django.db.models.functions import Round
+from analytics.models import Vacancy, Currency, Salary_by_city
 
 class Command(BaseCommand):
     help = 'Generate general statistics of vacancies'
 
     def handle(self, *args, **kwargs):
-        Salary_by_year.objects.all().delete()
+        Salary_by_city.objects.all().delete()
         data = Vacancy.objects.all()
         bd = Currency.objects.all()
 
@@ -27,11 +27,17 @@ class Command(BaseCommand):
 
         # Рассчитываем среднее значение (salary_from + salary_to) / 2
         data = data.annotate(avg_salary=((F('salary_from') + F('salary_to')) / 2))
+        total = data.count()
 
-        data = (data.annotate(year=Substr('published_at', 1, 4))  # Аннотируем данные, извлекая год из даты публикации
-                .values('year')  # Группируем данные по годам
-                .annotate(avg_salary=Round(Avg('avg_salary'), 2)))  # Рассчитываем среднюю зарплату по годам и округляем до 2 знаков после запятой
+        data = data.annotate(area=F('area_name'))  # Аннотируем названия городов
+        data = data.values('area')  # Группируем данные по названиям городов
+        data = data.annotate(count_vacancies=Count('area'))  # Считаем количество вакансий
+        data = data.filter(count_vacancies__gt=total * 0.01)  # Фильтруем города с количеством вакансий более 1%
+        data = data.annotate(avg_salary=Round(Avg('avg_salary'), 2))  # Рассчитываем среднюю зарплату
+
+        data = data.order_by('-avg_salary')  # Рассчитываем среднюю зарплату по годам и округляем до 2 знаков после запятой
 
         # Сохраняем новые данные в модель Salary_by_year
         for item in data:
-            Salary_by_year.objects.create(year=item['year'], avg_salary=item['avg_salary'])
+            Salary_by_city.objects.create(area_name=item['area'], avg_salary=item['avg_salary'])
+
