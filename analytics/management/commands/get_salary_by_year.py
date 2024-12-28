@@ -7,6 +7,7 @@ class Command(BaseCommand):
     help = 'Generate general statistics of vacancies'
 
     def handle(self, *args, **kwargs):
+        Salary_by_year.objects.all().delete()
         data = Vacancy.objects.all()
         bd = Currency.objects.all()
 

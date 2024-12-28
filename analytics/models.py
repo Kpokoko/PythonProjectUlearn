@@ -38,3 +38,19 @@ class Vacancies_by_year(models.Model):
 
     class Meta:
         db_table = 'vacancies_by_year'
+
+class Salary_by_city(models.Model):
+    avg_salary = models.FloatField()
+    area_name = models.CharField(max_length=50)
+
+    class Meta:
+        db_table = 'salaries_by_city'
+
+
+class Vacancies_by_city(models.Model):
+    vacancy_count = models.IntegerField()
+    vacancy_share = models.FloatField()
+    area_name = models.CharField(max_length=50)
+
+    class Meta:
+        db_table = 'vacancies_by_city'
