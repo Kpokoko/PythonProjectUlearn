@@ -24,13 +24,13 @@ class Currency(models.Model):
         db_table = 'currencies'
 
 
-
 class Salary_by_year(models.Model):
     avg_salary = models.FloatField()
     year = models.IntegerField()
 
     class Meta:
         db_table = 'salaries_by_year'
+
 
 class Vacancies_by_year(models.Model):
     vacancy_count = models.IntegerField()
@@ -39,12 +39,14 @@ class Vacancies_by_year(models.Model):
     class Meta:
         db_table = 'vacancies_by_year'
 
+
 class Salary_by_city(models.Model):
     avg_salary = models.FloatField()
     area_name = models.CharField(max_length=50)
 
     class Meta:
         db_table = 'salaries_by_city'
+        verbose_name_plural = 'salaries_by_city'
 
 
 class Vacancies_by_city(models.Model):
@@ -54,3 +56,4 @@ class Vacancies_by_city(models.Model):
 
     class Meta:
         db_table = 'vacancies_by_city'
+        verbose_name_plural = 'vacancies_by_city'
