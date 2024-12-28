@@ -41,8 +41,8 @@ class Command(BaseCommand):
             item.salary_to = 0 if item.salary_to is None else item.salary_to
 
         data = (data.annotate(year=Substr('published_at', 1, 4))
-                    .values('year')
-                    .annotate(avg_salary=Round(Avg((F('salary_from') + F('salary_to')) / 2), 2)))
+                .values('year')
+                .annotate(avg_salary=Round(Avg((F('salary_from') + F('salary_to')) / 2), 2)))
 
         # Определяем путь для сохранения файла
         file_path = os.path.join(os.getcwd(), "salary_by_year.csv")

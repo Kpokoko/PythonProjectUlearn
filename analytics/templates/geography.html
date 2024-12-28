@@ -51,6 +51,7 @@
             <thead>
                 <tr>
                     <th>Количество вакансий</th>
+                    <th>Доля вакансий в городе</th>
                     <th>Город</th>
                 </tr>
             </thead>
@@ -58,6 +59,7 @@
                 {% for e in vacancies_by_city %}
                     <tr>
                         <td>{{ e.vacancy_count }}</td>
+                        <td>{{ e.vacancy_share }}</td>
                         <td>{{ e.area_name }}</td>
                     </tr>
                 {% endfor %}

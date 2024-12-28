@@ -23,13 +23,13 @@ def get_exchange_rates(date, salary_currency, max_retries=3, delay=5):
             data = pd.read_xml(url, encoding="windows-1251")  # Загружаем и парсим XML данные с сайта ЦБ
             if salary_currency != "BYR":
                 currency = float(data[data['CharCode'] == salary_currency]['Value'].values[0].replace(',', '.')) if not \
-                data[data['CharCode'] == salary_currency].empty else 0
+                    data[data['CharCode'] == salary_currency].empty else 0
             else:
                 currency = float(data[data['CharCode'] == "BYR"]['Value'].values[0].replace(',', '.')) if not \
-                data[data['CharCode'] == "BYR"].empty else 0
+                    data[data['CharCode'] == "BYR"].empty else 0
                 if currency == 0:
                     currency = float(data[data['CharCode'] == "BYN"]['Value'].values[0].replace(',', '.')) if not \
-                    data[data['CharCode'] == "BYN"].empty else 0
+                        data[data['CharCode'] == "BYN"].empty else 0
             return currency  # Возвращаем курс
         except (requests.ConnectionError, ConnectionResetError) as e:
             if attempt < max_retries - 1:
@@ -63,7 +63,8 @@ class Command(BaseCommand):
                         continue
 
                     if item.salary_currency:  # Проверяем наличие валюты
-                        exchange_rates.append({'date': date, 'currency_code': item.salary_currency, 'currency': currency})
+                        exchange_rates.append(
+                            {'date': date, 'currency_code': item.salary_currency, 'currency': currency})
                         processed.add(key)
 
         # Сохраняем данные в базу данных

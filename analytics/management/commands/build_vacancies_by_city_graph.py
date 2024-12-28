@@ -26,6 +26,8 @@ class Command(BaseCommand):
         """
         df = pd.DataFrame(data)
         vacancies_by_city = df.set_index('area_name')['vacancy_share'].to_dict()
+        other_share = sum(vacancies_by_city.values())
+        vacancies_by_city['Остальные'] = 1 - other_share
         return vacancies_by_city  # Возврат распределения вакансий по городам
 
     def generate_pie_diagram(self, stats, ax, name):
@@ -39,6 +41,5 @@ class Command(BaseCommand):
             list(stats.values()),
             labels=list(stats.keys()),
             textprops={'fontsize': 6},
-            autopct='%1.1f%%'  # Добавляем подписи процентов
         )
         ax.set_title(name, fontsize=8)  # Установка заголовка диаграммы

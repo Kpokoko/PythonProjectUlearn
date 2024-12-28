@@ -3,6 +3,7 @@ from django.db.models import F, Avg, Count
 from django.db.models.functions import Round
 from analytics.models import Vacancy, Currency, Vacancies_by_city
 
+
 class Command(BaseCommand):
     help = 'Generate general statistics of vacancies'
 
@@ -34,5 +35,5 @@ class Command(BaseCommand):
 
         # Сохраняем новые данные в модель Salary_by_year
         for item in data:
-            Vacancies_by_city.objects.create(vacancy_share = item['vacancy_share'], area_name=item['area'], vacancy_count=item['count_vacancies'])
-
+            Vacancies_by_city.objects.create(vacancy_share=item['vacancy_share'], area_name=item['area'],
+                                             vacancy_count=item['count_vacancies'])
