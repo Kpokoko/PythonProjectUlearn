@@ -49,24 +49,41 @@ def get_vacancy_info(vacancy_id):
     return response.json()
 
 
+currencies_names = {
+    'AZN': 'манат',
+    'BYR': 'белорусских рублей',
+    'EUR': 'евро',
+    'GEL': 'грузинских лари',
+    'KGS': 'кыргызских сомов',
+    'KZT': 'тенге',
+    'RUR': 'рублей',
+    'UAH': 'гривен',
+    'USD': 'долларов',
+    'UZS': 'узбекских сум'
+}
+
+
 def get_salary(salary):
     salary_from = salary.get('from') or ''
     salary_to = salary.get('to') or ''
-    print(salary)
-    currency = salary.get('currency') or 'as'
+    currency_id = salary.get('currency') or ''
+    currency_name = ''
+    if currency_id:
+        currency_name = currencies_names[currency_id]
     if salary_from and salary_to:
-        return str(salary_from) + ' - ' + str(salary_to) + ' ' + currency
+        return str(salary_from) + ' - ' + str(salary_to) + ' ' + currency_name
     elif salary_from:
-        return 'От ' + str(salary_from) + ' ' + currency
+        return 'от ' + str(salary_from) + ' ' + currency_name
     elif salary_to:
-        return 'До ' + str(salary_to) + ' ' + currency
+        return 'до ' + str(salary_to) + ' ' + currency_name
     else:
-        return '0'
+        return 'не указан'
 
 
 def last_vacancies(request):
-    keywords = ['Системный администратор', 'system admin', 'сисадмин', 'сис админ', 'системный админ', 'cистемный админ',
-            'администратор систем', 'системний адміністратор']
+    keywords = ['Системный администратор', 'system admin', 'сисадмин', 'сис админ', 'системный админ',
+                'cистемный админ',
+                'администратор систем', 'системний адміністратор']
     vacancies = load_vacancies(keywords)
     detailed_vacancies = []
 
@@ -78,15 +95,18 @@ def last_vacancies(request):
         if details is None:
             continue
         salary = details.get('salary') or {}
+        skills_list = ", ".join([skill['name'] for skill in details.get('key_skills', [])])
+        if not skills_list:
+            skills_list = 'не указаны'
 
         detailed_vacancies.append({
-            'title': details.get('name', 'No title'),  # Default value если нет названия
-            'description': details.get('description', 'No description'),  # Default value если нет описания
-            'skills': ", ".join([skill['name'] for skill in details.get('key_skills', [])]),
-            'company': details.get('employer', {}).get('name', 'Unknown company'),  # Default value если нет компании
-            'salary': get_salary(salary),  # Используем пустой словарь если 'salary' нет
-            'region': details.get('area', {}).get('name', 'Unknown region'),  # Default value если нет региона
-            'published_at': details.get('published_at', 'Unknown date')  # Default value если нет даты публикации
+            'title': details.get('name'),
+            'description': details.get('description', 'пусто'),  # Пусто если нет описания
+            'skills': skills_list,
+            'company': details.get('employer', {}).get('name', 'неизвестна'),  # заглушка если нет компании
+            'salary': get_salary(salary),
+            'region': details.get('area', {}).get('name', 'не указан'),  # заглушка если нет региона
+            'published_at': details.get('published_at')
         })
 
     return render(request, 'last_vacancies.html', {'vacancies': detailed_vacancies})
