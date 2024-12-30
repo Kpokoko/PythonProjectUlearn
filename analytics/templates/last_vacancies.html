@@ -1,0 +1,19 @@
+{% extends 'html_sample.html' %}
+{% block content %}
+    <h1>Последние вакансии</h1>
+    <ol>
+    {% for vacancy in vacancies %}
+        <li>
+            <ul>
+            <li><h2>{{ vacancy.title }}</h2></li>
+                <li><p><strong>Описание:</strong> {{ vacancy.description|safe }}</p></li>
+                <li><p><strong>Навыки:</strong> {{vacancy.skills}}</p></li>
+                <li><p><strong>Компания:</strong> {{vacancy.company}}</p></li>
+                <li><p><strong>Оклад:</strong> {{vacancy.salary}}</p></li>
+                <li><p><strong>Регион:</strong> {{vacancy.region}}</p></li>
+                <li><p><strong>Дата публикации:</strong> {{vacancy.published_at}}</p></li>
+            </ul>
+        </li>
+    {% endfor %}
+    </ol>
+{% endblock %}
