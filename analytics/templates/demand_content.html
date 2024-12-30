@@ -1,0 +1,67 @@
+{% load static %}
+{% block content %}
+    <style>
+        .table-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            justify-content: center;
+        }
+        table {
+            border: 1px solid #333;
+        }
+        thead {
+            background-color: #333;
+            color: #fff;
+        }
+        td, th {
+            border: 1px solid #333;
+            padding: 8px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+    <h1>Востребованность</h1>
+    <h3>Динамика уровня зарплат по годам</h3>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Средняя зарплата</th>
+                    <th>Год</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for e in salaries_by_year %}
+                    <tr>
+                        <td>{{ e.avg_salary }}</td>
+                        <td>{{ e.year }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <img src="{% static 'img/graphs/salary_by_year.png' %}" alt="Уровень зарплат по годам">
+    </div>
+    <h3>Количество вакансий по годам</h3>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Количество вакансий</th>
+                    <th>Год</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for e in vacancies_by_year %}
+                    <tr>
+                        <td>{{ e.vacancy_count }}</td>
+                        <td>{{ e.year }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <img src="{% static 'img/graphs/vacancies_by_year.png' %}" alt="Количество вакансий по годам">
+    </div>
+{% endblock %}
