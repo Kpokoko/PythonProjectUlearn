@@ -13,6 +13,9 @@ class Vacancy(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name_plural = 'Vacancies'
+
 
 class Currency(models.Model):
     date = models.DateField()
@@ -22,6 +25,7 @@ class Currency(models.Model):
     class Meta:
         unique_together = ('date', 'currency_code')
         db_table = 'currencies'
+        verbose_name_plural = 'Currencies'
 
 
 class Salary_by_year(models.Model):
@@ -30,6 +34,7 @@ class Salary_by_year(models.Model):
 
     class Meta:
         db_table = 'salaries_by_year'
+        verbose_name_plural = 'Salaries_by_years'
 
 
 class Vacancies_by_year(models.Model):
@@ -57,3 +62,12 @@ class Vacancies_by_city(models.Model):
     class Meta:
         db_table = 'vacancies_by_city'
         verbose_name_plural = 'vacancies_by_city'
+
+
+class Top_skills(models.Model):
+    year = models.IntegerField()
+    skills_list = models.JSONField()
+
+    class Meta:
+        db_table = 'top_skills'
+        verbose_name_plural = 'top_skills'

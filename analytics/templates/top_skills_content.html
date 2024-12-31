@@ -1,0 +1,55 @@
+{% load static %}
+{% block content %}
+    <style>
+        .table-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            justify-content: center;
+        }
+        table {
+            border: 1px solid #333;
+        }
+        thead {
+            background-color: #333;
+            color: #fff;
+        }
+        td, th {
+            border: 1px solid #333;
+            padding: 8px;
+        }
+        h2 {
+            margin-top: 2em;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+    <h1>Навыки</h1>
+    <h3>Самые востребованные навыки по годам</h3>
+    <div>
+        {% for e in top_skills %}
+            <h2 style="text-align: center">{{ e.year }}</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Навык</th>
+                            <th>Частота навыка</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for skill, frequency in e.skills_list.items %}
+                            <tr>
+                                <td>{{ skill }}</td>
+                                <td>{{ frequency }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <img src="{% static 'img/graphs/top_skills_' %}{{ e.year }}.png">
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

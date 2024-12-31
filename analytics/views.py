@@ -14,9 +14,11 @@ def full_info(request):
     vacancies_by_year = Vacancies_by_year.objects.all()
     salaries_by_city = Salary_by_city.objects.all()
     vacancies_by_city = Vacancies_by_city.objects.all()
+    top_skills = Top_skills.objects.all()
     return render(request, 'full_info.html',
                   {'salaries_by_year': salaries_by_year, 'vacancies_by_year': vacancies_by_year,
-                   'salaries_by_city': salaries_by_city, 'vacancies_by_city': vacancies_by_city})
+                   'salaries_by_city': salaries_by_city, 'vacancies_by_city': vacancies_by_city,
+                   'top_skills': top_skills})
 
 
 def demand(request):
@@ -33,6 +35,11 @@ def geography(request):
                   {'salaries_by_city': salaries_by_city, 'vacancies_by_city': vacancies_by_city})
 
 
+def top_skills(request):
+    top_skills = Top_skills.objects.all()
+    return render(request, 'top_skills.html', {'top_skills': top_skills})
+
+
 def load_vacancies(keywords):
     api = 'https://api.hh.ru/vacancies'
     query = ' OR '.join(f'{keyword}' for keyword in keywords)
@@ -40,7 +47,6 @@ def load_vacancies(keywords):
     time = datetime.now()
     time_limit = time - timedelta(days=1)
     date_from = time_limit.isoformat()
-    date = datetime.fromisoformat(date_from)
     params = {
         'text': query,
         'date_from': date_from,
