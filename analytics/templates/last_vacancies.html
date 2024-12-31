@@ -1,0 +1,25 @@
+{% extends 'html_sample.html' %}
+{% load wrap_vacancy_description %}
+{% block content %}
+    <style>
+        .vacancy-info {
+            list-style: disc;
+        }
+    </style>
+    <h1>Последние вакансии</h1>
+    <ol>
+    {% for vacancy in vacancies %}
+        <li>
+            <h2>{{ vacancy.title }}</h2>
+            <ul class="vacancy-info">
+                <li><p><strong>Описание:</strong> {{ vacancy.description|wrap_p|safe }}</p></li>
+                <li><p><strong>Навыки:</strong> {{vacancy.skills}}</p></li>
+                <li><p><strong>Компания:</strong> {{vacancy.company}}</p></li>
+                <li><p><strong>Оклад:</strong> {{vacancy.salary}}</p></li>
+                <li><p><strong>Регион:</strong> {{vacancy.region}}</p></li>
+                <li><p><strong>Дата публикации:</strong> {{vacancy.published_at}}</p></li>
+            </ul>
+        </li>
+    {% endfor %}
+    </ol>
+{% endblock %}
