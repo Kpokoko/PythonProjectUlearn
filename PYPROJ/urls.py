@@ -4,7 +4,7 @@ from analytics import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello/', views.index, name='index'),
+    path('', views.index, name='index'),
     path('full_info/', views.full_info, name='full_info'),
     path('demand/', views.demand, name='demand'),
     path('geography/', views.geography, name='geography'),
