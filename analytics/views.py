@@ -1,7 +1,9 @@
 from datetime import datetime, timedelta
+from http.client import HTTPException
 
 from django.shortcuts import render
 from analytics.models import *
+from users.models import *
 import requests
 
 
@@ -87,6 +89,8 @@ def get_salary(salary):
     if currency_id:
         currency_name = currencies_names[currency_id]
     if salary_from and salary_to:
+        if salary_from == salary_to:
+            return str(salary_from) + ' ' + currency_name
         return str(salary_from) + ' - ' + str(salary_to) + ' ' + currency_name
     elif salary_from:
         return 'от ' + str(salary_from) + ' ' + currency_name
