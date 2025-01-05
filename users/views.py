@@ -1,4 +1,3 @@
-from django.contrib.auth.hashers import verify_password
 from django.shortcuts import render
 
 from users.models import User
