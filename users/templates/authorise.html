@@ -1,0 +1,32 @@
+{% extends 'html_sample.html' %}
+
+{% block styles %}
+  nav {
+    display: none;
+  }
+{% endblock %}
+
+{% block content %}
+  <h2>Вход</h2>
+
+  <h2>{{ answer }}</h2>
+
+  <!-- Форма с полями для регистрации -->
+  <form method="POST">
+    {% csrf_token %}
+
+    <!-- Поле для почты -->
+    <label for="email">Почта:</label>
+    <input type="email" name="email" id="email" required>
+
+    <!-- Поле для пароля -->
+    <label for="password">Пароль:</label>
+    <input type="password" name="password" id="password" required>
+
+    <!-- Кнопка отправки формы -->
+    <button type="submit">Войти</button>
+  </form>
+
+  <a href="register/">Зарегистрироваться</a>
+
+{% endblock %}

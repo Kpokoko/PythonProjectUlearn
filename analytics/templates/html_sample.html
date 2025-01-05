@@ -81,6 +81,7 @@
         .back-to-top:hover {
             background-color: #45a049;
         }
+    {% block styles %} {% endblock %}
     </style>
 </head>
 <body>
@@ -91,7 +92,7 @@
 
 <nav>
     <ul>
-        <li><a href="/">Домой</a></li>
+        <li><a href="/home">Домой</a></li>
         <li><a href="/full_info">Общая статистика</a></li>
         <li><a href="/demand">Востребованность</a></li>
         <li><a href="/geography">География</a></li>

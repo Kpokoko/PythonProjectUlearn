@@ -1,0 +1,40 @@
+{% extends 'html_sample.html' %}
+
+{% block styles %}
+  nav {
+    display: none;
+  }
+{% endblock %}
+
+{% block content %}
+  <h2>Регистрация</h2>
+
+  <h2>{{ answer }}</h2>
+
+  <!-- Форма с полями для регистрации -->
+  <form method="POST">
+    {% csrf_token %}
+
+    <!-- Поле для имени -->
+    <label for="name">Имя:</label>
+    <input type="text" name="name" id="name" required>
+
+    <!-- Поле для фамилии -->
+    <label for="surname">Фамилия:</label>
+    <input type="text" name="surname" id="surname" required>
+
+    <!-- Поле для почты -->
+    <label for="email">Почта:</label>
+    <input type="email" name="email" id="email" required>
+
+    <!-- Поле для пароля -->
+    <label for="password">Пароль:</label>
+    <input type="password" name="password" id="password" required>
+
+    <!-- Кнопка отправки формы -->
+    <button type="submit">Зарегистрироваться</button>
+  </form>
+
+  <a href="/">Войти</a>
+
+{% endblock %}
