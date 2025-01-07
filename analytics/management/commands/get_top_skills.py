@@ -6,7 +6,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         Top_skills.objects.all().delete()
         data = Vacancy.objects.all()
-        skills_by_year = {}
+        skills_by_year = {'0000': {}}
         for item in data:
             year = item.published_at.year
             skills_str = item.key_skills
@@ -22,6 +22,9 @@ class Command(BaseCommand):
                     if skill not in skills_by_year[year]:
                         skills_by_year[year][skill] = 0
                     skills_by_year[year][skill] += 1
+                    if skill not in skills_by_year['0000']:
+                        skills_by_year['0000'][skill] = 0
+                    skills_by_year['0000'][skill] += 1
 
         # Оставляем топ-20 навыков для каждого года и сортируем
         sorted_top_skills = {year: dict(sorted(counts.items(), key=lambda item: item[1], reverse=True)[:20]) for

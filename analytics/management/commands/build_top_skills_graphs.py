@@ -6,10 +6,9 @@ from analytics.models import Salary_by_year, Top_skills
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        raw_data = Salary_by_year.objects.all()
         top_skills = Top_skills.objects.all()
 
-        unique_years = raw_data.values_list('year', flat=True).distinct()
+        unique_years = top_skills.values_list('year', flat=True).distinct()
 
         for year in unique_years:
             data = {}
@@ -19,14 +18,16 @@ class Command(BaseCommand):
                 top_skills_dict = skills_frequency[0]
                 for skill, frequency in top_skills_dict.items():
                     data[skill] = frequency
-
-                names = ['Частота навыка', f'Частотность популярных навыков в {year} году']
+                if year != 0:
+                    names = ['Частота навыка', f'Частотность популярных навыков в {year} году']
+                else:
+                    names = ['Частота навыка', f'Частотность популярных навыков за всё время']
 
                 fig, ax = plt.subplots()  # Увеличим размер графика
                 self.generate_vertical_graph(data, ax, names)
 
                 fig.tight_layout()
-                plt.savefig(f'analytics/static/img/graphs/top_skills_{year}.png')
+                plt.savefig(f'static/img/graphs/top_skills_{year}.png')
                 plt.show()
 
     def generate_vertical_graph(self, stats, ax, names):

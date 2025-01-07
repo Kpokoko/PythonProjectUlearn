@@ -1,1 +1,0 @@
-print("Templatetags loaded")

@@ -1,87 +1,14 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/scroll.js' %}"></script>
     <title>Pyproj</title>
     <style>
-        h1 {
-            text-align: center;
-        }
-        h3 {
-            text-align: center;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: grid;
-            grid-template-areas:
-                "header header"
-                "nav main"
-                "footer footer";
-            grid-template-columns: 200px 1fr;
-            grid-template-rows: auto 1fr auto;
-            height: 100vh;
-        }
-        header {
-            grid-area: header;
-            background-color: #4CAF50;
-            color: white;
-            text-align: center;
-            padding: 1em 0;
-        }
-        nav {
-            grid-area: nav;
-            background: #f1f1f1;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        main {
-            grid-area: main;
-            padding: 20px;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li a {
-            display: block;
-            padding: 8px 16px;
-            text-decoration: none;
-            color: #000;
-        }
-        li a:hover {
-            background-color: #555;
-            color: white;
-        }
-        footer {
-            grid-area: footer;
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1em 0;
-        }
-        .back-to-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            border-radius: 5px;
-            z-index: 100;
-            display: none; /* Скрываем по умолчанию */
-        }
-        .back-to-top.show {
-            display: block; /* Показываем при прокрутке */
-        }
-        .back-to-top:hover {
-            background-color: #45a049;
-        }
-    {% block styles %} {% endblock %}
+        {% block styles %} {% endblock %}
     </style>
 </head>
 <body>
@@ -112,18 +39,6 @@
 <button class="back-to-top" id="back-to-top" onclick="scrollToTop()">Вверх</button>
 
 <script>
-    function scrollToTop() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    window.onscroll = function() {
-        var backToTopButton = document.getElementById('back-to-top');
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            backToTopButton.classList.add('show');
-        } else {
-            backToTopButton.classList.remove('show');
-        }
-    };
 </script>
 
 </body>
