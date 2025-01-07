@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'analytics',
-    'users'
+    'users',
+    'django_recaptcha',
 ]
 
 MIDDLEWARE = [
@@ -119,10 +120,16 @@ USE_TZ = True
 
 import os
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+RECAPTCHA_PUBLIC_KEY = '6Le2wrAqAAAAAJsAoKoVdIeHxtkjwXNTxkWtX2T4'
+RECAPTCHA_PRIVATE_KEY = '6Le2wrAqAAAAADXB1J85IzIAmGc4XckEu9AWv1fw'
