@@ -29,9 +29,9 @@
                     </tbody>
                 </table>
                 {% if e.year == 0 %}
-                    <img src="{% static 'img/graphs/top_skills_0.png' %}">
+                    <img src="{% static 'analytics/img/graphs/top_skills_0.png' %}">
                 {% else %}
-                    <img src="{% static 'img/graphs/top_skills_' %}{{ e.year }}.png">
+                    <img src="{% static 'analytics/img/graphs/top_skills_' %}{{ e.year }}.png">
                 {% endif %}
             </div>
         {% endfor %}

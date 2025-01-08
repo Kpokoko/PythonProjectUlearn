@@ -27,7 +27,7 @@ class Command(BaseCommand):
                 self.generate_vertical_graph(data, ax, names)
 
                 fig.tight_layout()
-                plt.savefig(f'static/img/graphs/top_skills_{year}.png')
+                plt.savefig(f'analytics\\static\\analytics\\img\\graphs\\top_skills_{year}.png')
                 plt.show()
 
     def generate_vertical_graph(self, stats, ax, names):

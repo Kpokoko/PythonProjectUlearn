@@ -15,7 +15,7 @@ class Command(BaseCommand):
         self.generate_vertical_graph(stats, ax, names)
 
         fig.tight_layout()  # Оптимизация расположения графиков
-        plt.savefig('analytics\\static\\img\\graphs\\salary_by_city.png')  # Сохранение графика в PNG файл
+        plt.savefig('analytics\\static\\analytics\\img\\graphs\\salary_by_city.png')  # Сохранение графика в PNG файл
         plt.show()  # Отображение графиков
 
     def get_salary_stats(self, data):
