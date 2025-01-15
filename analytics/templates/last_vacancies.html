@@ -1,16 +1,11 @@
 {% extends 'html_sample.html' %}
 {% load wrap_vacancy_description %}
 {% block content %}
-    <style>
-        .vacancy-info {
-            list-style: disc;
-        }
-    </style>
-    <h1>Последние вакансии</h1>
-    <ol>
+    <h2>Последние вакансии</h2>
+    <ul>
     {% for vacancy in vacancies %}
-        <li>
-            <h2>{{ vacancy.title }}</h2>
+        <li class="vacancy">
+            <h3>{{ vacancy.title }}</h3>
             <ul class="vacancy-info">
                 <li><p><strong>Описание:</strong> {{ vacancy.description|wrap_p|safe }}</p></li>
                 <li><p><strong>Навыки:</strong> {{vacancy.skills}}</p></li>
@@ -21,5 +16,5 @@
             </ul>
         </li>
     {% endfor %}
-    </ol>
+    </ul>
 {% endblock %}

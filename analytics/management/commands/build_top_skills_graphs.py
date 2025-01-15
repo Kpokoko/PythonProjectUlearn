@@ -41,7 +41,7 @@ class Command(BaseCommand):
         skills = list(stats.keys())
         values = list(stats.values())
 
-        ax.bar(x, values, label=names[0])
+        ax.bar(x, values, color="#61FF7B", label=names[0])
         ax.set_title(names[1], fontsize=16)
         ax.set_xticks(x)
         ax.set_xticklabels(skills, fontsize=8, rotation=70, ha='right')  # Правильное выравнивание меток

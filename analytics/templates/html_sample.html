@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="{% static 'analytics/css/style.css' %}">
     <script src="{% static 'analytics/js/scroll.js' %}"></script>
     <title>Pyproj</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
     <style>
         {% block styles %} {% endblock %}
     </style>
@@ -14,23 +17,24 @@
 <body>
 
 <header>
-    <h1>Pyproj</h1>
+    <nav>
+        <p>МЕНЮ</p>
+        <ul>
+            <li><a href="/home">Домой</a></li>
+            <li><a href="/full_info">Общая статистика</a></li>
+            <li><a href="/demand">Востребованность</a></li>
+            <li><a href="/geography">География</a></li>
+            <li><a href="/top_skills">Навыки</a></li>
+            <li><a href="/last_vacancies">Последние вакансии</a></li>
+        </ul>
+    </nav>
+    <h1>Системный администратор</h1>
 </header>
-
-<nav>
-    <ul>
-        <li><a href="/home">Домой</a></li>
-        <li><a href="/full_info">Общая статистика</a></li>
-        <li><a href="/demand">Востребованность</a></li>
-        <li><a href="/geography">География</a></li>
-        <li><a href="/top_skills">Навыки</a></li>
-        <li><a href="/last_vacancies">Последние вакансии</a></li>
-    </ul>
-</nav>
 
 <main>
     {% block content %}
     {% endblock %}
+    <div class="bottom-img"></div>
 </main>
 <footer>
     <p>Медведев Фома Леонидович, РИ-230932/АТ-11</p>
