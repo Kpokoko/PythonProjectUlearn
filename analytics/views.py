@@ -117,7 +117,7 @@ def last_vacancies(request):
         if not skills_list:
             skills_list = 'не указаны'
 
-        formatted_date = datetime.fromisoformat(details.get('published_at')).strftime('%d.%m.%Y, %H:%M:%S %Z')
+        formatted_date = datetime.fromisoformat(details.get('published_at').replace('Z', '+00:00')).strftime('%d.%m.%Y, %H:%M:%S %Z')
         detailed_vacancies.append({
             'title': details.get('name'),
             'description': details.get('description', 'пусто'),  # Пусто если нет описания
