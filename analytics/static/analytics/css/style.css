@@ -262,6 +262,7 @@ form p {
     background-color: #d9d9d9;
 }
 .enter-buttons .button {
+    cursor: pointer;
     font-family: Jura;
 }
 .button {
