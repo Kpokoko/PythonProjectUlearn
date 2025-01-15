@@ -7,19 +7,20 @@
 {% endblock %}
 
 {% block content %}
-  <h2>Вход</h2>
+  <div class="form">
+    <h2>Вход</h2>
 
-  {% if answer %}
-    <h3>{{ answer }}</h3>
-  {% endif %}
+    {% if answer %}
+      <h3>{{ answer }}</h3>
+    {% endif %}
 
-
-  <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Войти</button>
-  </form>
-
-  <a href="register/">Зарегистрироваться</a>
-
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <ul class="enter-buttons">
+        <li><button type="submit" class="button">Войти</button></li>
+        <li><button type="button" class="button" onclick="window.location.href='register/'" formnovalidate>Зарегистрироваться</button></li>
+      </ul>
+    </form>
+  </div>
 {% endblock %}

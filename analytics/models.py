@@ -15,6 +15,7 @@ class Vacancy(models.Model):
 
     class Meta:
         verbose_name_plural = 'Vacancies'
+        db_table = 'Vacancies'
 
 
 class Currency(models.Model):

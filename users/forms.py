@@ -8,9 +8,9 @@ class RegisterForm(forms.Form):
     surname = forms.CharField(max_length=50, label='Фамилия')
     email = forms.EmailField(label='Почта')
     password = forms.CharField(widget=forms.PasswordInput, label='Пароль')
-    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox, label="")
 
 class LoginForm(forms.Form):
     email = forms.EmailField(label='Почта')
     password = forms.CharField(widget=forms.PasswordInput, label='Пароль')
-    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox, label="")

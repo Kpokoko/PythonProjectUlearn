@@ -15,7 +15,7 @@ class Command(BaseCommand):
         self.generate_pie_diagram(stats, ax, name)
 
         fig.tight_layout()  # Оптимизация расположения графиков
-        plt.savefig('analytics\\static\\img\\graphs\\vacancies_by_city.png')  # Сохранение графика в PNG файл
+        plt.savefig('analytics\\static\\analytics\\img\\graphs\\vacancies_by_city.png')  # Сохранение графика в PNG файл
         plt.show()  # Отображение графиков
 
     def get_salary_stats(self, data):

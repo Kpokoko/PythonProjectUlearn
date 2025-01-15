@@ -1,9 +1,7 @@
 from datetime import datetime, timedelta
-from http.client import HTTPException
 
 from django.shortcuts import render
 from analytics.models import *
-from users.models import *
 import requests
 
 
@@ -119,6 +117,7 @@ def last_vacancies(request):
         if not skills_list:
             skills_list = 'не указаны'
 
+        formatted_date = datetime.fromisoformat(details.get('published_at')).strftime('%d.%m.%Y, %H:%M:%S %Z')
         detailed_vacancies.append({
             'title': details.get('name'),
             'description': details.get('description', 'пусто'),  # Пусто если нет описания
@@ -126,7 +125,7 @@ def last_vacancies(request):
             'company': details.get('employer', {}).get('name', 'неизвестна'),  # заглушка если нет компании
             'salary': get_salary(salary),
             'region': details.get('area', {}).get('name', 'не указан'),  # заглушка если нет региона
-            'published_at': details.get('published_at')
+            'published_at': formatted_date
         })
 
     return render(request, 'last_vacancies.html', {'vacancies': detailed_vacancies})

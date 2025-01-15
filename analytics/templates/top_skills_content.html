@@ -1,16 +1,16 @@
 {% load static %}
 {% block content %}
-    <h1>Навыки</h1>
+    <h2>Навыки</h2>
     <h3>Самые востребованные навыки по годам</h3>
     <div>
         {% for e in top_skills %}
-            <h2 style="text-align: center">
+            <h4>
                 {% if e.year == 0 %}
                     Частотность популярных навыков за всё время
                 {% else %}
                     Частотность популярных навыков в {{ e.year }} году
                 {% endif %}
-            </h2>
+            </h4>
             <div class="table-container">
                 <table>
                     <thead>
@@ -29,9 +29,9 @@
                     </tbody>
                 </table>
                 {% if e.year == 0 %}
-                    <img src="{% static 'img/graphs/top_skills_0.png' %}">
+                    <img src="{% static 'analytics/img/graphs/top_skills_0.png' %}">
                 {% else %}
-                    <img src="{% static 'img/graphs/top_skills_' %}{{ e.year }}.png">
+                    <img src="{% static 'analytics/img/graphs/top_skills_' %}{{ e.year }}.png">
                 {% endif %}
             </div>
         {% endfor %}

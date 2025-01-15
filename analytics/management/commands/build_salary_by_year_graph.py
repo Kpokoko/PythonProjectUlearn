@@ -15,7 +15,7 @@ class Command(BaseCommand):
         self.generate_vertical_graph(stats, ax, names)
 
         fig.tight_layout()  # Оптимизация расположения графиков
-        plt.savefig('analytics\\static\\img\\graphs\\salary_by_year.png')  # Сохранение графика в PNG файл
+        plt.savefig('analytics\\static\\analytics\\img\\graphs\\salary_by_year.png')  # Сохранение графика в PNG файл
         plt.show()  # Отображение графиков
 
     def get_salary_stats(self, data):
@@ -39,7 +39,7 @@ class Command(BaseCommand):
         years = list(stats.keys())
         values = list(stats.values())
 
-        ax.bar(x, values, label=names[0])  # Отрисовка столбцов
+        ax.bar(x, values, color="#61FF7B", label=names[0])  # Отрисовка столбцов
         ax.set_title(names[1], fontsize=12)  # Установка заголовка диаграммы
         ax.set_xticks(x)  # Установка меток по оси X
         ax.set_xticklabels(years, fontsize=10, rotation=45)  # Настройка меток по оси X
